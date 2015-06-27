@@ -5,7 +5,10 @@
     <persistence-unit name="jpa-test-pu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>com.mjurik.web.crawler.db.Contact</class>
+        <class>com.mjurik.web.crawler.db.dialect.LocalDatePersistenceConverter</class>
+        <class>com.mjurik.web.crawler.db.dialect.LocalDateTimePersistenceConverter</class>
+
+        <class>com.mjurik.web.crawler.db.entity.NumEuResult</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:target/mydb.db"/>
