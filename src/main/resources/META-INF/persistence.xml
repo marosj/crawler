@@ -11,7 +11,7 @@
         <class>com.mjurik.web.crawler.db.entity.NumEuResult</class>
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:target/mydb.db"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:mince.db"/>
             <property name="javax.persistence.jdbc.user" value=""/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>

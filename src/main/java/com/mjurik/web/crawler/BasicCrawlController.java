@@ -1,5 +1,6 @@
 package com.mjurik.web.crawler;
 
+import com.mjurik.web.crawler.db.PersistenceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 
 public class BasicCrawlController {
-    private static final Logger logger = LoggerFactory.getLogger(BasicCrawlController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BasicCrawlController.class);
 
     public static void main(String[] args) throws Exception {
     /*
@@ -31,9 +32,6 @@ public class BasicCrawlController {
 
         config.setMaxPagesToFetch(30);
 
-    /*
-     * Instantiate the controller for this crawl.
-     */
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
@@ -41,6 +39,10 @@ public class BasicCrawlController {
 
         controller.addSeed("http://www.numizmatik.eu/c/mince/slovensko");
 
+        LOGGER.info("Start date time {}", Utils.INST.getStartDateTime());
         controller.start(NumizmatikEuCrawler.class, numberOfCrawlers);
+
+        LOGGER.info("Closing application");
+        PersistenceManager.INSTANCE.close();
     }
 }

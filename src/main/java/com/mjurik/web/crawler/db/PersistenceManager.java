@@ -10,7 +10,7 @@ public enum PersistenceManager {
     private EntityManagerFactory emFactory;
 
     PersistenceManager() {
-        emFactory = Persistence.createEntityManagerFactory("jpa-test-pu");
+        emFactory = Persistence.createEntityManagerFactory("jpa-mince-pu");
     }
 
     public EntityManager getEntityManager() {

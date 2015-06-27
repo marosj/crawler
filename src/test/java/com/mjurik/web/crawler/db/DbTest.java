@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by Marian Jurik on 27.6.2015.
  */
@@ -31,5 +33,7 @@ public class DbTest {
 
         em.close();
         PersistenceManager.INSTANCE.close();
+
+        assertNotNull(result.getId());
     }
 }

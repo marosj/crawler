@@ -1,5 +1,7 @@
 package com.mjurik.web.crawler;
 
+import com.mjurik.web.crawler.db.NumEuPersistence;
+import com.mjurik.web.crawler.db.entity.NumEuResult;
 import com.mjurik.web.crawler.parser.NumizmatikEuParser;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
@@ -8,6 +10,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 /**
@@ -50,6 +53,7 @@ public class NumizmatikEuCrawler extends WebCrawler {
             NumizmatikEuParser.Result parsedData = NumizmatikEuParser.parse(html);
             if (parsedData != null) {
                 LOGGER.info("Parsed: {}", parsedData);
+                persist(parsedData, path);
 
                 if (parsedData.getVariants().size() > 0) {
                     for (String variant : parsedData.getVariants()) {
@@ -62,5 +66,19 @@ public class NumizmatikEuCrawler extends WebCrawler {
         }
 
         LOGGER.debug("=====");
+    }
+
+    private void persist(NumizmatikEuParser.Result result, String path) {
+        NumEuResult entity = new NumEuResult();
+        entity.setPath(path);
+        entity.setProcessTime(LocalDateTime.now());
+        entity.setStartDateTime(Utils.INST.getStartDateTime());
+        entity.setStartDate(Utils.INST.getStartDate());
+        entity.setEan(result.getId());
+        entity.setName(result.getName());
+        entity.setPrice(result.getPrice());
+        entity.setVariant(result.getSelectedVariant());
+
+        NumEuPersistence.INSTANCE.persist(entity);
     }
 }
