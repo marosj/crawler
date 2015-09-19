@@ -1,10 +1,11 @@
 package com.mjurik.web.crawler.db.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Created by Marian Jurik on 28.6.2015.
@@ -23,6 +24,8 @@ public class ResultEntity {
     private LocalDateTime processTime;
 
     private String path;
+
+    private Boolean processed;
 
     public String getId() {
         return id;
@@ -64,4 +67,11 @@ public class ResultEntity {
         this.path = path;
     }
 
+    public Boolean getProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(Boolean processed) {
+        this.processed = processed;
+    }
 }

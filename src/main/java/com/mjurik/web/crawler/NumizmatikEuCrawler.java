@@ -1,5 +1,11 @@
 package com.mjurik.web.crawler;
 
+import java.time.LocalDateTime;
+import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mjurik.web.crawler.db.NumEuPersistence;
 import com.mjurik.web.crawler.db.entity.NumEuResult;
 import com.mjurik.web.crawler.parser.NumizmatikEuParser;
@@ -7,11 +13,6 @@ import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.time.LocalDateTime;
-import java.util.regex.Pattern;
 
 /**
  * Created by alvin on 22.6.2015.
@@ -78,6 +79,7 @@ public class NumizmatikEuCrawler extends WebCrawler {
         entity.setName(result.getName());
         entity.setPrice(result.getPrice());
         entity.setVariant(result.getSelectedVariant());
+        entity.setProcessed(false);
 
         NumEuPersistence.INSTANCE.persist(entity);
     }

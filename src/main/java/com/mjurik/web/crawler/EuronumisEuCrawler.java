@@ -72,6 +72,7 @@ public class EuronumisEuCrawler extends WebCrawler {
         entity.setName(result.getName());
         entity.setPrice(result.getPrice());
         entity.setVariant(result.getSelectedVariant());
+        entity.setProcessed(false);
 
         EuronEuPersistence.INSTANCE.persist(entity);
     }
