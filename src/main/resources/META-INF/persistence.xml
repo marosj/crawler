@@ -9,6 +9,8 @@
         <class>com.mjurik.web.crawler.db.dialect.LocalDateTimePersistenceConverter</class>
 
         <class>com.mjurik.web.crawler.db.entity.NumEuResult</class>
+        <class>com.mjurik.web.crawler.db.entity.ResultEntity</class>
+        <class>com.mjurik.web.crawler.db.entity.EuronEuResult</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:mince.db"/>

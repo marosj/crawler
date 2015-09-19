@@ -1,15 +1,14 @@
 package com.mjurik.web.crawler.db.entity;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
- * Result of one numizmatik.eu page
+ * Result of one euronumis.eu page
  *
- * Created by Marian Jurik on 27.6.2015.
+ * Created by Marian Jurik on 28.6.2015.
  */
 @Entity
-public class NumEuResult extends ResultEntity {
+public class EuronEuResult extends ResultEntity {
 
     private String name;
 
@@ -53,7 +52,7 @@ public class NumEuResult extends ResultEntity {
 
     @Override
     public String toString() {
-        return "NumEuResult{" +
+        return "EuronEuResult{" +
                 "id='" + getId() + '\'' +
                 ", name='" + name + '\'' +
                 ", ean='" + ean + '\'' +

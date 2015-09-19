@@ -19,9 +19,9 @@ public class BasicCrawlController {
      * crawlStorageFolder is a folder where intermediate crawl data is
      * stored.
      */
-        String crawlStorageFolder = "target/crawled/";
+        LOGGER.info("Start date time {}", Utils.INST.getStartDateTime());
 
-        int numberOfCrawlers = 3;
+        String crawlStorageFolder = "target/crawled/";
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
@@ -35,13 +35,17 @@ public class BasicCrawlController {
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
-        CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        controller.addSeed("http://www.numizmatik.eu/c/mince/slovensko");
+        CrawlController controllerNumizmatikEu = new CrawlController(config, pageFetcher, robotstxtServer);
+        controllerNumizmatikEu.addSeed("http://www.numizmatik.eu/c/mince/slovensko");
+        controllerNumizmatikEu.startNonBlocking(NumizmatikEuCrawler.class, 1);
 
-        LOGGER.info("Start date time {}", Utils.INST.getStartDateTime());
-        controller.start(NumizmatikEuCrawler.class, numberOfCrawlers);
+        CrawlController controllerEuronumisEu = new CrawlController(config, pageFetcher, robotstxtServer);
+        controllerEuronumisEu.addSeed("http://www.euronumis.eu/euronumis/eshop/6-1-Slovensko-Slovakia");
+        controllerEuronumisEu.startNonBlocking(EuronumisEuCrawler.class, 1);
 
+        controllerNumizmatikEu.waitUntilFinish();;
+        controllerEuronumisEu.waitUntilFinish();;
         LOGGER.info("Closing application");
         PersistenceManager.INSTANCE.close();
     }
