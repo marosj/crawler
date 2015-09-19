@@ -1,10 +1,13 @@
 package com.mjurik.web.crawler.db;
 
-import com.mjurik.web.crawler.db.entity.NumEuResult;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
+import com.mjurik.web.crawler.db.entity.NumEuResult;
 
 /**
  * Created by Marian Jurik on 27.6.2015.
@@ -26,5 +29,10 @@ public enum NumEuPersistence {
             em.close();
         }
 
+    }
+
+    public List<NumEuResult> listUnprocessed() {
+        EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+        return em.createQuery("select res from NumEuResult res where res.processed = false", NumEuResult.class).getResultList();
     }
 }
