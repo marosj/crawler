@@ -25,9 +25,17 @@
         <processorPath useClasspath="true" />
         <module name="crawler" />
       </profile>
+      <profile default="false" name="Annotation profile for numismaticshist" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="numismaticshist" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="crawler" target="1.8" />
+      <module name="numismaticshist" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
