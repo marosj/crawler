@@ -11,6 +11,7 @@
         <class>com.mjurik.web.crawler.db.entity.NumEuResult</class>
         <class>com.mjurik.web.crawler.db.entity.ResultEntity</class>
         <class>com.mjurik.web.crawler.db.entity.EuronEuResult</class>
+        <class>com.mjurik.web.crawler.db.entity.IgnoredPath</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:target/mydb.db"/>

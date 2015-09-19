@@ -33,6 +33,25 @@ public enum NumEuPersistence {
 
     public List<NumEuResult> listUnprocessed() {
         EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
-        return em.createQuery("select res from NumEuResult res where res.processed = false", NumEuResult.class).getResultList();
+        try {
+            return em.createQuery("select res from NumEuResult res where res.processed = false", NumEuResult.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void setAsProcessed(String id) {
+        EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+        try {
+            NumEuResult entity = em.find(NumEuResult.class, id);
+            if (entity != null) {
+                entity.setProcessed(Boolean.TRUE);
+                em.getTransaction().begin();
+                em.persist(entity);
+                em.getTransaction().commit();
+            }
+        } finally {
+            em.close();
+        }
     }
 }

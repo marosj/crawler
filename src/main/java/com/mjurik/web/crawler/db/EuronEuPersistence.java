@@ -32,7 +32,26 @@ public enum EuronEuPersistence {
 
     public List<EuronEuResult> listUnprocessed() {
         EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
-        return em.createQuery("select res from EuronEuResult res where res.processed = false", EuronEuResult.class).getResultList();
+        try {
+            return em.createQuery("select res from EuronEuResult res where res.processed = false", EuronEuResult.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void setAsProcessed(String id) {
+        EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+        try {
+            EuronEuResult entity = em.find(EuronEuResult.class, id);
+            if (entity != null) {
+                entity.setProcessed(Boolean.TRUE);
+                em.getTransaction().begin();
+                em.persist(entity);
+                em.getTransaction().commit();
+            }
+        } finally {
+            em.close();
+        }
     }
 
 }
