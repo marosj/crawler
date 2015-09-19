@@ -1,5 +1,9 @@
 package com.mjurik.web.crawler.db;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
@@ -18,7 +22,7 @@ public enum IgnoredPathPersistence {
 
     public void persistIgnoredPath(String source, String path) {
         LOGGER.debug("Persisting ignored {}: {}", source, path);
-        IgnoredPath entity  = new IgnoredPath();
+        IgnoredPath entity = new IgnoredPath();
         entity.setPath(path);
         entity.setSource(source);
 
@@ -31,5 +35,21 @@ public enum IgnoredPathPersistence {
             em.close();
         }
 
+    }
+
+    public Collection<String> getIgnoredPaths(String source) {
+        EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+        try {
+            List<String> result = em.createQuery("select ip.path from IgnoredPath ip where ip.source=:source ", String.class)
+                    .setParameter("source", source)
+                    .getResultList();
+            if (result != null) {
+                return result;
+            } else {
+                return Collections.emptyList();
+            }
+        } finally {
+            em.close();
+        }
     }
 }

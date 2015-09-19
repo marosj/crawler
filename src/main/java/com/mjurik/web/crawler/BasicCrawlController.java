@@ -1,9 +1,9 @@
 package com.mjurik.web.crawler;
 
-import com.mjurik.web.crawler.db.PersistenceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mjurik.web.crawler.db.PersistenceManager;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
@@ -20,6 +20,10 @@ public class BasicCrawlController {
      * stored.
      */
         LOGGER.info("Start date time {}", Utils.INST.getStartDateTime());
+
+        LOGGER.info("Initializing ignore path lists");
+        IgnoredPathList.EURONUMIS.init();
+        IgnoredPathList.NUMIZMATIK.init();
 
         String crawlStorageFolder = "target/crawled/";
 

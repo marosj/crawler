@@ -47,6 +47,11 @@ public class NumizmatikEuCrawler extends WebCrawler {
         LOGGER.debug("URL: {}", url);
         LOGGER.info("Path: '{}'", path);
 
+        if (IgnoredPathList.NUMIZMATIK.isIgnored(path)) {
+            LOGGER.info("Skipping parsing of path {} because it is in ignore list", path);
+            return;
+        }
+
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String html = htmlParseData.getHtml();
