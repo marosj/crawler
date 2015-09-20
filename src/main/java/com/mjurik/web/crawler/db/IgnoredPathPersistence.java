@@ -18,7 +18,7 @@ public enum IgnoredPathPersistence {
 
     INSTANCE;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NumEuPersistence.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IgnoredPathPersistence.class);
 
     public void persistIgnoredPath(String source, String path) {
         LOGGER.debug("Persisting ignored {}: {}", source, path);

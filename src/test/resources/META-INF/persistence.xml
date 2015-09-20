@@ -12,6 +12,9 @@
         <class>com.mjurik.web.crawler.db.entity.ResultEntity</class>
         <class>com.mjurik.web.crawler.db.entity.EuronEuResult</class>
         <class>com.mjurik.web.crawler.db.entity.IgnoredPath</class>
+        <class>com.mjurik.web.crawler.db.entity.Coin</class>
+        <class>com.mjurik.web.crawler.db.entity.CoinVariant</class>
+        <class>com.mjurik.web.crawler.db.entity.CoinVariantHistory</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:target/mydb.db"/>
