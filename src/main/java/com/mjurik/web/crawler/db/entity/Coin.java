@@ -1,16 +1,10 @@
 package com.mjurik.web.crawler.db.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MapKey;
-import javax.persistence.OneToMany;
 
 /**
  * Created by Marian Jurik on 20.9.2015.
@@ -76,5 +70,12 @@ public class Coin {
     public void addVariant(CoinVariant variant) {
         variant.setCoin(this);
         variants.put(variant.getVariant(), variant);
+    }
+
+    public boolean matchFulltextSearch(String searchString) {
+        return id.toLowerCase().contains(searchString)
+                || StringUtils.containsIgnoreCase(name, searchString)
+                || StringUtils.containsIgnoreCase(nominal.toString(),searchString)
+                || StringUtils.containsIgnoreCase(description, searchString);
     }
 }
