@@ -1,13 +1,14 @@
 package com.mjurik.web.crawler.db.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Currency;
+import com.mjurik.web.crawler.Money;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Currency;
 
 /**
  * Created by Marian Jurik on 20.9.2015.
@@ -75,5 +76,10 @@ public class CoinVariantHistory {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public void setPrice(Money price) {
+        this.price = price.getAmount();
+        this.currency = price.getCurrency();
     }
 }
