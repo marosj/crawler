@@ -1,11 +1,11 @@
 package com.mjurik.web.crawler.db.entity;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Created by Marian Jurik on 28.6.2015.
@@ -73,5 +73,18 @@ public class ResultEntity {
 
     public void setProcessed(Boolean processed) {
         this.processed = processed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ResultEntity)) return false;
+        ResultEntity that = (ResultEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
