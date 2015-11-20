@@ -6,6 +6,15 @@ package com.mjurik.web.crawler.db.entity;
 public enum NominalValue {
 
     SK_100,
+    SK_200,
+    SK_500,
+    SK_1000,
+    SK_5000,
+    SK_10000,
+
+    E_10,
     E_100,
-    E_200
+    E_200,
+
+    COLLECTION
 }

@@ -5,5 +5,6 @@ package com.mjurik.web.crawler.db.entity;
  */
 public enum Variant {
     PROOF,
-    BK
+    BK,
+    UNKNOWN
 }
